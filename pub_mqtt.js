@@ -1,9 +1,10 @@
 console.log("init program");
-
-const URL = "mqtt://pi-ariascabana:AriasCabana@pi-ariascabana.cloud.shiftr.io";
-const ID  = "German";
-const USERNAME = "pi-ariascabana";
-const PASS = "AriasCabana";
+// Credentials
+const URL2 =  "mqtt://lseserver.ddns.net"
+const URL = "mqtt://simointi.cloud.shiftr.io";
+const ID  = "simointi";
+const USERNAME = "simointi";
+const PASS = "fdZY5b69OhOVsAns";
 
 
 const mqtt = require('mqtt')
@@ -17,7 +18,9 @@ const options = {
   password: PASS,
 }
 
-const client  = mqtt.connect(URL, options)
+
+
+const client  = mqtt.connect(URL2)
 
 
 
@@ -28,67 +31,19 @@ client.on('connect', function () {
 })
 
 
+interval = 1 ;
+max = 20;
+counter = 0;
+setInterval(()=>{
 
+ // msg= ` ,${interval},${max}, `
+  msg= ` ,${1},${7}, `
 
+    client.publish("CMD", msg,{qos:2, retain: true})
+    console.log(msg)
+    interval ++;
 
-
-
-
-  
-  
-  
-  
-  
-
-
-
-
-  
-
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-  
-  
-  
-  readline.question('Who are you?', name => {
-    console.log(`Hey there ${name}!`);
-   // readline.close();
-  });
-
-  
-
-  readline.question('Who are you?', name => {
-    console.log(`Hey there ${name}!`);
-    readline.close();
-  });
-  
-let message;
-let topic;
-
-while(0){
-
-    
-    readline.question('insertar topic', _topic => {
-    console.log(`topic ${_topic}!`);
-  //  topic = _topic;
-    readline.close();
-    });
-    readline.question('insertar message', msg => {
-    console.log(`msg ${message}!`);
-   // message = msg;
-    readline.close();
-    });
-   // client.publish(topic, message)
-
-   
-
-
-}
-
-
-
+},10000);
 
 
 
