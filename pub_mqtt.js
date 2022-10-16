@@ -31,19 +31,20 @@ client.on('connect', function () {
 })
 
 
-interval = 1 ;
-max = 20;
+interval = 5 ;
+max = 100;
 counter = 0;
 setInterval(()=>{
 
  // msg= ` ,${interval},${max}, `
-  msg= ` ,${1},${7}, `
+  msg= ` ,${1},${max}, `
+  //msg = "nada"
 
-    client.publish("CMD", msg,{qos:2, retain: true})
+    client.publish("CMD", msg,{qos:0,retein:false})
     console.log(msg)
-    interval ++;
+    max ++;
 
-},10000);
+},2500);
 
 
 
