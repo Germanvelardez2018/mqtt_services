@@ -1,35 +1,37 @@
+// Broker gratuito
+// https://www.hivemq.com/public-mqtt-broker/
 
-
-
-// Credentials
-const URL = "mqtt://simointi.cloud.shiftr.io";
-const URL2 =  "mqtt://lseserver.ddns.net"
-
-const ID  = "simointi";
-const USERNAME = "simointi";
-const PASS = "fdZY5b69OhOVsAns";
+const URL2	 =  "mqtt://lseserver.ddns.net"
+const URL 	 = "mqtt://simointi.cloud.shiftr.io";
+const ID 	 = "simo pub";
+const USERNAME   = "simointi";
+const PASS 	 = "fdZY5b69OhOVsAns";
+const URL_HIVEMQ =  "mqtt://broker.hivemq.com"
 
 
 const mqtt = require('mqtt')
 const options = {
-  // Clean session
-  clean: true,
-  connectTimeout: 4000,
-  // Auth
-  clientId: ID,
-  username: USERNAME,
-  password: PASS,
-}
+  	// Clean session
+  	clean: true,
+  	connectTimeout: 4000,
+  	// Auth
+  	clientId: ID,
+  	username: USERNAME,
+  	password: PASS,
+      }
 
 
+
+const client  = mqtt.connect(URL_HIVEMQ)
+
+console.log("Conectado a ",URL_HIVEMQ);
 const list_topics = [
     'CMD',
-    'SIMO_CONFIG2',
-    'X1111'
+    "X1111",
+    'SIMO_INIT'
 ]
-console.log("iniciando sub mqtt")
 
-const client  = mqtt.connect(URL2,{qos:2})
+
 
 client.on('connect', function () {
     console.log('Connected to the list');
@@ -56,11 +58,11 @@ client.on('message', function (topic, message) {
             console.log(`llego mensaje en topic ${topic}: ${message.toString()}`);
         break;
 
-        case 'SIMO_CONFIG2':
+        case "X1111":
             console.log(`llego mensaje en topic ${topic}: ${message.toString()}`);
         break;
 
-        case 'X1111':
+        case 'SIMO_INIT':
             console.log(`llego mensaje en topic ${topic}: ${message.toString()}`);
         break;
     } 
